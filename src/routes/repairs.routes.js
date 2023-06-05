@@ -1,6 +1,6 @@
 const express = require('express');
 
-const repairControllers = require('../controllers/repair.controllers');
+const repairControllers = require('../controllers/repairs.controllers');
 
 const validationMiddleware = require('./../middlewares/validations.middleware');
 

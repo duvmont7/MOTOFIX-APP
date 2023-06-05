@@ -5,7 +5,7 @@ exports.findRepairs = async (req, res) => {
 
   const repairs = await Repairs.findAll({
     where: {
-      status: true,
+      status: "pending",
     },
   });
 
@@ -40,8 +40,8 @@ exports.updateRepairs = async (req, res) => {
     await repair.update({ completed });
 
     return res.status(200).json({
-      status: 'success',
-      message: 'The repair has been updated',
+      status: 'completed',
+      message: 'The repair has been completed',
     });
   } catch (error) {
     return res.status(500).json({

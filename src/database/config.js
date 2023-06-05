@@ -6,7 +6,7 @@ const db = new Sequelize({
   username: 'postgres',
   password: process.env.DB_PASSWORD,
   database: 'motofix_db',
-  loggin: false,
+  logging: false,
 });
 
 module.exports = { db };
