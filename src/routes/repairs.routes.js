@@ -1,15 +1,12 @@
 const express = require('express');
 
-const repairControllers = require('../controllers/repairs.controllers');
-
-const validationMiddleware = require('./../middlewares/validations.middleware');
+const repairControllers = require('../controllers/repair.controllers');
 
 const repairRouter = express.Router();
-
 repairRouter
   .route('/')
   .get(repairControllers.findRepairs)
-  .post(validationMiddleware.validRepairs, repairControllers.createRepairs);
+  .post(repairControllers.createRepairs);
 
 repairRouter
   .route('/:id')

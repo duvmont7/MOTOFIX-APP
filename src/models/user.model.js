@@ -10,15 +10,15 @@ const User = db.define('users', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'available',
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'available',
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'available',
   },
   role: {
     type: DataTypes.INTEGER,

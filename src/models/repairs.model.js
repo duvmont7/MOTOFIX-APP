@@ -5,21 +5,21 @@ const Repairs = db.define('users', {
   id: {
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false,
+    allowNull: 'pending',
     type: DataTypes.INTEGER,
   },
   date: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'pending',
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'pending',
     defaultValue: 'pending',
   },
   userId: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: 'pending',
   },
 });
 

@@ -5,7 +5,7 @@ exports.findRepairs = async (req, res) => {
 
   const repairs = await Repairs.findAll({
     where: {
-      status: "pending",
+      status: 'pending',
     },
   });
 
@@ -26,7 +26,7 @@ exports.updateRepairs = async (req, res) => {
     const repair = await Repairs.findOne({
       where: {
         id,
-        status: true,
+        status: 'pending',
       },
     });
 
@@ -37,10 +37,10 @@ exports.updateRepairs = async (req, res) => {
       });
     }
 
-    await repair.update({ completed });
+    await repair.update({ status: 'completed' });
 
     return res.status(200).json({
-      status: 'completed',
+      status: 'success',
       message: 'The repair has been completed',
     });
   } catch (error) {
@@ -87,7 +87,7 @@ exports.findRepairs = async (req, res) => {
     const repair = await Repairs.findOne({
       where: {
         userId,
-        status: true,
+        status: 'pending',
       },
     });
 
@@ -121,7 +121,7 @@ exports.deleteRepairs = async (req, res) => {
     const repair = await Repairs.findOne({
       where: {
         id,
-        status: true,
+        status: 'pending',
       },
     });
 
@@ -132,7 +132,7 @@ exports.deleteRepairs = async (req, res) => {
       });
     }
 
-    await repair.update({ status: 'canceled' });
+    await repair.update({ status: 'cancelled' });
 
     return res.status(200).json({
       status: 'success',

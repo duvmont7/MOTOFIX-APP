@@ -1,15 +1,13 @@
 const express = require("express");
 
-//const usersController = require("../controllers/users.controllers");
-
-// const validationMiddleware = require("./../middlewares/validations.middleware");
+const usersControllers = require("../controllers/users.controllers");
 
 const userRouter = express.Router();
 
 userRouter
   .route("/")
   .get(usersControllers.findUsers)
-  .post(validationMiddleware.validUsers, usersController.createUser);
+  .post( usersControllers.createUser);
 
 userRouter
   .route("/:id")
