@@ -10,24 +10,24 @@ const User = db.define('users', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: 'available',
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: 'available',
+    allowNull: false,
+    unique: true, //esto es para que este email sea único
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: 'available',
+    allowNull: false,
   },
   role: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.ENUM('client', 'employee'),
     allowNull: false,
-    enum: ['client', 'employee'],
     defaultValue: 'client',
   },
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM('available', 'disabled'),
     allowNull: false,
     defaultValue: 'available',
   },

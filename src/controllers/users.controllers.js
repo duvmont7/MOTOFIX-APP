@@ -1,21 +1,23 @@
 const User = require('../models/user.model');
 
 exports.findUsers = async (req, res) => {
-  const time = req.requestTime;
-
-  const users = await User.findAll({
-    where: {
-      status: 'available',
-    },
-  });
-
-  return res.json({
-    requestTime: time,
-    results: users.length,
-    status: 'success',
-    message: 'User found',
-    users,
-  });
+  try {
+    const users = await User.findAll({
+      where: {
+        status: 'available',
+      },
+    });
+    return res.status(200).jason({
+      status: 'success',
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Something went very wrong❌',
+    });
+  }
 };
 
 exports.updateUser = async (req, res) => {
@@ -44,9 +46,10 @@ exports.updateUser = async (req, res) => {
       message: 'The user has been updated',
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: 'fail',
-      message: 'Something went very wrong',
+      message: 'Something went very wrong❌',
     });
   }
 };
@@ -64,18 +67,11 @@ exports.createUser = async (req, res) => {
       password,
       role,
     });
-
-    // PASO 3: ENVIAR UNA RESPUESTA AL CLIENTE
-
-    return res.status(201).json({
-      message: 'The user has been created!',
-      user,
-    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       status: 'fail',
-      message: 'Something went very wrong!',
+      message: 'Something went very wrong❌',
     });
   }
 };
@@ -88,7 +84,6 @@ exports.findUser = async (req, res) => {
     //? 2. BUSCO EL PRODUCTO EN LA BASE DE DATOS
     const user = await User.findOne({
       where: {
-        // id: id
         id,
         status: 'available',
       },
@@ -112,7 +107,7 @@ exports.findUser = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       status: 'fail',
-      message: 'Something went very wrong!',
+      message: 'Something went very wrong❌',
     });
   }
 };
@@ -142,9 +137,10 @@ exports.deleteUser = async (req, res) => {
       message: 'The user has been deleted',
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: 'fail',
-      message: 'Something went very wrong!',
+      message: 'Something went very wrong❌',
     });
   }
 };

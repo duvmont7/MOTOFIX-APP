@@ -1,21 +1,23 @@
 const Repairs = require('../models/repairs.model');
 
 exports.findRepairs = async (req, res) => {
-  const time = req.requestTime;
-
-  const repairs = await Repairs.findAll({
-    where: {
-      status: 'pending',
-    },
-  });
-
-  return res.json({
-    requestTime: time,
-    results: repairs.length,
-    status: 'success',
-    message: 'User found',
-    repairs,
-  });
+  try {
+    const repairs = await Repairs.findAll({
+      where: {
+        status: 'pending',
+      },
+    });
+    return res.status(200).json({
+      status: 'success',
+      repairs,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Something went very wrong',
+    });
+  }
 };
 
 exports.updateRepairs = async (req, res) => {
@@ -44,6 +46,7 @@ exports.updateRepairs = async (req, res) => {
       message: 'The repair has been completed',
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       status: 'fail',
       message: 'Something went very wrong',
@@ -78,7 +81,7 @@ exports.createRepairs = async (req, res) => {
   }
 };
 
-exports.findRepairs = async (req, res) => {
+exports.findRepair = async (req, res) => {
   try {
     //? 1. NOS TRAEMOS EL ID DE LOS PARAMETROS
     const { id } = req.params; //DESTRUCION DE OBJETOS
@@ -86,7 +89,7 @@ exports.findRepairs = async (req, res) => {
     //? 2. BUSCO EL PRODUCTO EN LA BASE DE DATOS
     const repair = await Repairs.findOne({
       where: {
-        userId,
+        id,
         status: 'pending',
       },
     });
@@ -136,9 +139,10 @@ exports.deleteRepairs = async (req, res) => {
 
     return res.status(200).json({
       status: 'success',
-      message: 'The repair has been canceled',
+      message: 'The repair has been cancelled',
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: 'fail',
       message: 'Something went very wrong!',

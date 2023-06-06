@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/v1/repairs', userRouter);
-app.use('/api/v1/users', repairRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/repairs', repairRouter);
 
 module.exports = app;

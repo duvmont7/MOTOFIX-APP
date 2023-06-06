@@ -10,7 +10,7 @@ repairRouter
 
 repairRouter
   .route('/:id')
-  .get(repairControllers.findRepairs)
+  .get(repairControllers.findRepair)
   .patch(repairControllers.updateRepairs)
   .delete(repairControllers.deleteRepairs);
 
