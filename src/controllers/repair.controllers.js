@@ -1,13 +1,18 @@
+const catchAsync = require('../utils/catchAsync');
 const Repairs = require('../models/repairs.model');
 const Users = require('../models/users.model');
-const catchAsync = require('../utils/catchAsync');
 
 exports.findRepairs = catchAsync(async (req, res, next) => {
-  const repairs = await Repairs.findAll({
-    where: { status: 'pending' },
+  const repairs = await Repair.findAll({
+    where: { status: ['pending', 'completed'] },
     attributes: {
       exclude: ['status'],
     },
+    include: [
+      {
+        model: Users,
+      },
+    ],
   });
 
   res.json({

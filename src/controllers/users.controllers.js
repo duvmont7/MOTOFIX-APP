@@ -1,8 +1,8 @@
-const User = require('../models/user.model');
-const catchAsync = require('../utils/catchAsync');
-const bcrypt = require('bcryptjs');
-const generateJWT = require('../utils/jwt');
 const AppError = require('../utils/appError');
+const bcrypt = require('bcryptjs');
+const catchAsync = require('../utils/catchAsync');
+const generateJWT = require('../utils/jwt');
+const User = require('../models/user.model');
 
 exports.findUsers = catchAsync(async (req, res, next) => {
   const users = await User.findAll({
